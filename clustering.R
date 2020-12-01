@@ -20,12 +20,14 @@ for (i in 1:N) {
   for (j in i:N) {
     compare <- elem2list(data$hashtags[j])
     dist_sum <- 0
+    dist_sum_opposite <- 0
     for (hashtag in hashtags) {
       dist_sum <- dist_sum + min(stringdist(c(hashtag), compare))
     }
-    i
-    j
-    dist.matrix[j, i] <- dist_sum / length(hashtags)
+    for (hashtag in compare) {
+      dist_sum_opposite <- dist_sum_opposite + min(stringdist(c(hashtag), hashtags))
+    }
+    dist.matrix[j, i] <- (dist_sum / length(hashtags) + dist_sum_opposite / length(compare)) / 2
   }
 }
 dist.matrix
