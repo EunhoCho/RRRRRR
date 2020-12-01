@@ -1,8 +1,11 @@
 rm(list=ls())
-setwd('/home/greenmon/Projects/RRRRRR/')
+# setwd('/home/greenmon/Projects/RRRRRR/')
+setwd('/Users/juyeonyoon/Projects/RRRRRR')
 # install.packages('stringdist')
 
 library(stringdist)
+library(extrafont) 
+font_import()
 
 data <- read.csv('dataframes/cluster_features.csv')
 # 
@@ -40,3 +43,4 @@ dist <- as.dist(dist.matrix, diag=TRUE)
 hc <- hclust(dist)
 hc
 plot(hc)
+
