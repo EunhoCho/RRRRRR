@@ -3,7 +3,7 @@ library(reshape)
 library(tm)
 library(wordcloud)
 
-par(family="AppleGothic")
+
 
 df <- read.csv('dataframes/wordcloud_df.csv')
 
@@ -65,12 +65,11 @@ document_tm_mat
 
 # -- STEP 3 : make the graphics !
 
-par(family="NanumGothic")
-par(font="AppleGothic")
+par(family="a펜글씨B")
 
 # Graph 1 : first top 500 discriminant words
 
-comparison.cloud(document_tm_mat, max.words=100, random.order=FALSE,c(4,0.4), title.size=1.4, width=500, height = 500, family="NanumGothic")
+comparison.cloud(document_tm_mat, max.words=300, random.order=FALSE,c(4,0.4), title.size=1.4, width=500, height = 500, family="서울남산체 B")
 
 
 # Graph 2 : first top 2000 discriminant words
