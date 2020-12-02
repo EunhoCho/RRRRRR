@@ -90,7 +90,10 @@ memb_df<-rename(memb_df,"id" = "code")
 memb_df
 memb_df$id <- memb_df$id/100
 
+memb_df
+
 cluster_map <- left_join(jeju_map, memb_df, by = "id")
 cluster_map$breaks <- cut(cluster_map$membership, 8)
 ggmap(jeju) +
-  geom_polygon(data = cluster_map, aes(x = long, y = lat, group = group, fill = breaks), show.legend = FALSE) + scale_colour_brewer(type = 'div', palette = 'PRGn', direction = -1) 
+  geom_polygon(data = cluster_map, aes(x = long, y = lat, group = group, fill = breaks),color='white', show.legend = FALSE) + scale_colour_brewer(type = 'div', palette = 'PRGn', direction = -1) 
+
