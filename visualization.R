@@ -75,9 +75,9 @@ ggmap(jeju) +
 
 # visualize clustering result
 source('./clustering.R')
-
-memb_df <- data.frame(t(data.frame(as.list(memb))[-1]))
-
+memb
+memb_df <- data.frame(t(data.frame(as.list(memb))))
+memb_df
 rownames(memb_df) <- gsub("1", "일", rownames(memb_df))
 rownames(memb_df) <- gsub("2", "이", rownames(memb_df))
 rownames(memb_df) <- gsub("3", "삼", rownames(memb_df))
