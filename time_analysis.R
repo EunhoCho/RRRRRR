@@ -17,6 +17,11 @@ for (i in 1:length(addr)){
 
 head(data)
 
+# remove duplicated keys
+library(tidyverse)
+data <- data[!duplicated(data$key),]
+str(data)
+
 library(dplyr)
 library(ggplot2)
 library(forcats)
@@ -28,6 +33,7 @@ data_6to17 <- filter(data, 6 <= datetime & datetime < 17) %>%
   mutate(rank=order(n, decreasing=T)) %>%
   arrange(rank) %>%
   mutate(address=fct_reorder(address, rank))
+str(data_6to17)
 
 ggplot(data_6to17[1:10,], aes(address, n, fill=n)) +
   geom_bar(stat="identity", show.legend=F) +
