@@ -47,6 +47,7 @@ count<-rename(count,"id" = "code")
 count
 count$id <- count$id/100
 
+
 map$id <- as.numeric(map$id)
 jeju_map <- map[map$id >= 50000000, ]
 jeju_map <- jeju_map[jeju_map$lat <= 33.9, ]
@@ -71,3 +72,25 @@ ggmap(jeju) +
                       space = "Lab",
                       guide = "colourbar")
 
+
+# visualize clustering result
+source('./clustering.R')
+
+memb_df <- data.frame(t(data.frame(as.list(memb))[-1]))
+
+rownames(memb_df) <- gsub("1", "일", rownames(memb_df))
+rownames(memb_df) <- gsub("2", "이", rownames(memb_df))
+rownames(memb_df) <- gsub("3", "삼", rownames(memb_df))
+
+memb_df <- cbind(rownames(memb_df), memb_df)
+colnames(memb_df) <- c('dong', 'membership')
+
+memb_df <- left_join(memb_df, emd_code, by="dong")
+memb_df<-rename(memb_df,"id" = "code")
+memb_df
+memb_df$id <- memb_df$id/100
+
+cluster_map <- left_join(jeju_map, memb_df, by = "id")
+cluster_map$breaks <- cut(cluster_map$membership, 8)
+ggmap(jeju) +
+  geom_polygon(data = cluster_map, aes(x = long, y = lat, group = group, fill = breaks), show.legend = FALSE) + scale_colour_brewer(type = 'div', palette = 'PRGn', direction = -1) 
