@@ -80,7 +80,7 @@ kinds <- data[, 4:7]
 par(mar=c(15,4,4,2))
 end_point = 0.5 + nrow(kinds) + nrow(kinds) - 1 
 
-barplot(t(kinds), main="Cluster Themes", col=c("#FF6666", "#6666CC", "#009900", "#00CCFF"), ylab="# of Posts", space=1)
+barplot(t(kinds), main="Travel Spot Characteristics", col=c("#FF6666", "#6666CC", "#009900", "#00CCFF"), ylab="# of Posts", space=1)
 
 legend("topright",names(kinds), fill=c("#FF6666", "#6666CC", "#009900", "#00CCFF"))
 text(seq(1.5, end_point, by = 2), par("usr")[3]-0.25, 

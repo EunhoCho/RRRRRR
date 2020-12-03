@@ -13,9 +13,10 @@ library(ggdendro)
 library(ggplot2)
 library(dplyr) 
 library(dendextend)
-# font_import()
+font_import()
 theme_set(theme_grey(base_family='NanumGothic'))
 library(readr)
+library(factoextra)
 
 data <- read_csv('dataframes/cluster_features.csv')
 
@@ -92,7 +93,7 @@ library(proxy)
 library(dplyr)
 library(utf8)
 
-data <- read.csv('dataframes/cluster_features_filtered.csv', encoding="utf-8")
+data <- read.csv('dataframes/cluster_features.csv', encoding="utf-8")
 doc <- c()
 N <- length(data$location)
 
@@ -144,7 +145,13 @@ Cosine <- function(x, y) {
 # tf-idf matrix using news' title 
 result <- TFIDF(doc)
 
+library(RColorBrewer)
+coul <- colorRampPalette(brewer.pal(8, "PiYG"))(25)
+
 hashtag_tf_idf <- result[1][[1]]
+heatmap(hashtag_tf_idf, Colv = NA, Rowv = NA, scale="column", col= colorRampPalette(brewer.pal(8, "Blues"))(25), xlab="Terms", ylab="Locations", main="TF-IDF Matrix")
+
+
 terms <- result[2][[1]]
 
 rownames(hashtag_tf_idf) <- data$location
@@ -154,6 +161,7 @@ write.csv(hashtag_tf_idf, 'tf_idf_matrix.csv')
 
 dist_tf_idf <- dist(hashtag_tf_idf, method = "Cosine")
 
+fviz_dist(dist_tf_idf, lab_size = 8)
 cluster_tf_idf <- hclust(dist_tf_idf, method="ward.D")
 cluster_tf_idf
 
