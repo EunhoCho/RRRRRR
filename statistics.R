@@ -9,6 +9,7 @@ mo = matrix(c(data$count), dimnames=list(c(data$location), c('count')))
 as.table(mo)
 chisq.test(mo)
 
+
 # X-squared = 1902.1, df = 25, p-value < 2.2e-16
 # the popularity of travel spots are not equally divided
 
@@ -70,4 +71,19 @@ ggplot(data2, aes(x=location, y=count)) +
 mo = matrix(c(data2$count), dimnames=list(c(data2$location), c('count')))
 as.table(mo)
 chisq.test(mo)
+
+
+
+data <- read.csv('cluster_themes.csv')
+kinds <- data[, 4:7]
+
+par(mar=c(15,4,4,2))
+end_point = 0.5 + nrow(kinds) + nrow(kinds) - 1 
+
+barplot(t(kinds), main="Cluster Themes", col=c("#FF6666", "#6666CC", "#009900", "#00CCFF"), ylab="# of Posts", space=1)
+
+legend("topright",names(kinds), fill=c("#FF6666", "#6666CC", "#009900", "#00CCFF"))
+text(seq(1.5, end_point, by = 2), par("usr")[3]-0.25, 
+     srt = 60, adj = 1, xpd = TRUE,
+     labels = paste(data$locations), cex = 0.85)
 

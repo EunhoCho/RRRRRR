@@ -8,7 +8,7 @@ library(ggrepel)
 library(dplyr)
 library(tidyr)
 library(extrafont)
-font_import()
+
 
 par(family="AppleGothic")
 
@@ -146,7 +146,6 @@ memb_df
 cluster_map <- left_join(jeju_map, memb_df, by = "id")
 cluster_map$breaks <- cut(cluster_map$membership, 8)
 ggmap(jeju) +
-
   geom_polygon(data = cluster_map, aes(x = long, y = lat, group = group, fill = breaks),color='white', show.legend = FALSE) + scale_colour_brewer(type = 'div', palette = 'PRGn', direction = -1) 
 
 
